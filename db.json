@@ -37,10 +37,26 @@
     {
       "id": 1,
       "userId": 1,
-      "date": "2024-12-18",
+      "date": "2024-12-19",
       "startTime": "09:30",
       "endTime": "18:30",
       "totalTime": 9
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "date": "2024-12-19",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "totalTime": 9
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "date": "2024-12-19",
+      "startTime": "09:00",
+      "endTime": "15:00",
+      "totalTime": 6
     }
   ],
   "salary": [
@@ -48,6 +64,18 @@
       "id": 1,
       "userId": 1,
       "totalSalary": 30000,
+      "monthDate": "2024-12-01"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "totalSalary": 30000,
+      "monthDate": "2024-12-01"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "totalSalary": 27000,
       "monthDate": "2024-12-01"
     }
   ],
