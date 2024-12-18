@@ -21,9 +21,54 @@
       "password": "123456",
       "salaryRate": 800,
       "role": "USER"
+    },
+    {
+      "surname": "Сарина",
+      "name": "Екатерина",
+      "patronymic": "Сергеевна",
+      "phone": "+79992221122",
+      "email": "a@mail.ru",
+      "password": "123123",
+      "salaryRate": 450,
+      "id": 3
     }
   ],
-  "workDays": [],
-  "salary": [],
-  "schedule": []
+  "workDays": [
+    {
+      "id": 1,
+      "userId": 1,
+      "date": "2024-12-18",
+      "startTime": "09:30",
+      "endTime": "18:30",
+      "totalTime": 9
+    }
+  ],
+  "salary": [
+    {
+      "id": 1,
+      "userId": 1,
+      "totalSalary": 30000,
+      "monthDate": "2024-12-01"
+    }
+  ],
+  "schedule": [
+    {
+      "id": 1,
+      "userId": 1,
+      "startWork": "09:00",
+      "endWork": "17:00"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "startWork": "09:00",
+      "endWork": "18:00"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "startWork": "09:00",
+      "endWork": "15:00"
+    }
+  ]
 }
