@@ -12,19 +12,37 @@ index.use(jsonServer.bodyParser);
 index.post("/login", (req, res) => {
   try {
     const { email, password } = req.body;
-    const db = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8")
-    );
-    const { users = [] } = db;
+    const dbPath = path.resolve(__dirname, "db.json");
+    const db = JSON.parse(fs.readFileSync(dbPath, "UTF-8"));
+    const { users = [], workDays = [] } = db;
 
     const userFromBd = users.find(
       (user) => user.email === email && user.password === password
     );
 
-    console.log(userFromBd);
-
     if (userFromBd) {
-      return res.json(userFromBd);
+      const today = new Date().toISOString().split("T")[0];
+      const existingWorkDay = workDays.find(
+        (workDay) => workDay.userId === userFromBd.id && workDay.date === today
+      );
+      const startTime = new Date().toTimeString().split(" ")[0].slice(0, 5);
+
+      if (!existingWorkDay) {
+        const newWorkDay = {
+          id: workDays.length + 1,
+          userId: userFromBd.id,
+          date: today,
+          startTime: startTime,
+          endTime: "17:00",
+          totalTime: 0
+        };
+
+        workDays.push(newWorkDay);
+        fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), "UTF-8");
+        router.db.setState(db);
+      }
+
+      return res.json({authUser: userFromBd, workDays});
     }
 
     return res.status(403).json({ message: "Неправильный логин или пароль" });
