@@ -415,8 +415,8 @@
       "userId": 7,
       "date": "2024-12-25",
       "startTime": "15:49",
-      "endTime": "17:02",
-      "totalTime": 1.2
+      "endTime": "17:17",
+      "totalTime": 1.5
     }
   ],
   "salary": [
@@ -441,7 +441,7 @@
     {
       "id": 4,
       "userId": 7,
-      "totalSalary": 0,
+      "totalSalary": 30,
       "monthDate": "2024-12-01"
     }
   ],

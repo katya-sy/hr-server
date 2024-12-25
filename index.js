@@ -71,14 +71,18 @@ index.post("/logout", async (req, res) => {
     const { id } = req.body;
     const dbPath = path.resolve(__dirname, "db.json");
     const db = JSON.parse(await fs.promises.readFile(dbPath, "UTF-8"));
-    const { users = [], workDays = [] } = db;
+    const { users = [], workDays = [], salary = [] } = db;
 
     const userFromBd = users.find((user) => user.id === id);
 
     if (userFromBd) {
       const today = new Date().toISOString().split("T")[0];
+      const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toLocaleDateString('en-CA');
       const existingWorkDay = workDays.find(
         (workDay) => workDay.userId === userFromBd.id && workDay.date === today
+      );
+      const existingSalary = salary.find(
+        (sal) => sal.userId === userFromBd.id && sal.monthDate === firstDayOfMonth
       );
 
       if (existingWorkDay) {
@@ -90,6 +94,12 @@ index.post("/logout", async (req, res) => {
 
         existingWorkDay.endTime = endTime;
         existingWorkDay.totalTime = parseFloat(totalTime);
+
+        if (existingSalary) {
+          existingSalary.totalSalary += userFromBd.salaryRate * existingWorkDay.totalTime;
+        }
+        console.log(existingSalary);
+        console.log(userFromBd.salaryRate, "+", existingWorkDay.totalTime)
 
         await fs.promises.writeFile(dbPath, JSON.stringify(db, null, 2), "UTF-8");
         router.db.setState(db);
