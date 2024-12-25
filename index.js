@@ -14,7 +14,7 @@ index.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const dbPath = path.resolve(__dirname, "db.json");
     const db = JSON.parse(fs.readFileSync(dbPath, "UTF-8"));
-    const { users = [], workDays = [] } = db;
+    const { users = [], workDays = [], salary = [] } = db;
 
     const userFromBd = users.find(
       (user) => user.email === email && user.password === password
@@ -22,8 +22,12 @@ index.post("/login", async (req, res) => {
 
     if (userFromBd) {
       const today = new Date().toISOString().split("T")[0];
+      const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toLocaleDateString('en-CA');
       const existingWorkDay = workDays.find(
         (workDay) => workDay.userId === userFromBd.id && workDay.date === today
+      );
+      const existingSalary = salary.find(
+        (sal) => sal.userId === userFromBd.id && sal.monthDate === firstDayOfMonth
       );
       const startTime = new Date().toTimeString().split(" ")[0].slice(0, 5);
 
@@ -36,11 +40,21 @@ index.post("/login", async (req, res) => {
           endTime: "",
           totalTime: 0
         };
-
         workDays.push(newWorkDay);
-        await fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), "UTF-8");
-        router.db.setState(db);
       }
+
+      if (!existingSalary) {
+        const newSalary = {
+          id: salary.length + 1,
+          userId: userFromBd.id,
+          totalSalary: 0,
+          monthDate: firstDayOfMonth
+        };
+        salary.push(newSalary);
+      }
+
+      await fs.promises.writeFile(dbPath, JSON.stringify(db, null, 2), "UTF-8");
+      router.db.setState(db);
 
       return res.json(userFromBd);
     }
