@@ -43,18 +43,18 @@
       "id": 4
     },
     {
-      "surname": "й",
+      "surname": "йfыаппппп",
       "name": "й",
       "patronymic": "й",
       "phone": "+72221112211",
       "email": "q@mail.ru",
       "password": "q@mail.ru",
-      "salaryRate": 400,
+      "salaryRate": 450,
       "id": 5
     },
     {
-      "surname": "r",
-      "name": "r",
+      "surname": "rqw",
+      "name": "rа",
       "patronymic": "rr",
       "phone": "+76665554455",
       "email": "r@mail.ru",
@@ -66,7 +66,7 @@
       "surname": "er@",
       "name": "er@mail.ru",
       "patronymic": "er@mail.ru",
-      "phone": "+70008889900",
+      "phone": "+70008889923",
       "email": "er@mail.ru",
       "password": "er@mail.ru",
       "salaryRate": 20,
@@ -383,8 +383,8 @@
       "userId": 3,
       "date": "2024-12-25",
       "startTime": "09:00",
-      "endTime": "15:00",
-      "totalTime": 6
+      "endTime": "21:49",
+      "totalTime": 12.8
     },
     {
       "id": 40,
@@ -415,8 +415,8 @@
       "userId": 7,
       "date": "2024-12-25",
       "startTime": "15:49",
-      "endTime": "17:17",
-      "totalTime": 1.5
+      "endTime": "21:43",
+      "totalTime": 5.9
     }
   ],
   "salary": [
@@ -435,13 +435,13 @@
     {
       "id": 3,
       "userId": 3,
-      "totalSalary": 27000,
+      "totalSalary": 32760,
       "monthDate": "2024-12-01"
     },
     {
       "id": 4,
       "userId": 7,
-      "totalSalary": 30,
+      "totalSalary": 210,
       "monthDate": "2024-12-01"
     }
   ],
