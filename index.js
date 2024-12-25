@@ -52,6 +52,47 @@ index.post("/login", async (req, res) => {
   }
 });
 
+index.post("/logout", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const dbPath = path.resolve(__dirname, "db.json");
+    const db = JSON.parse(await fs.promises.readFile(dbPath, "UTF-8"));
+    const { users = [], workDays = [] } = db;
+
+    const userFromBd = users.find((user) => user.id === id);
+
+    if (userFromBd) {
+      const today = new Date().toISOString().split("T")[0];
+      const existingWorkDay = workDays.find(
+        (workDay) => workDay.userId === userFromBd.id && workDay.date === today
+      );
+
+      if (existingWorkDay) {
+        const endTime = new Date().toTimeString().split(" ")[0].slice(0, 5);
+        const startTime = existingWorkDay.startTime;
+        const start = new Date(`1970-01-01T${startTime}:00Z`);
+        const end = new Date(`1970-01-01T${endTime}:00Z`);
+        const totalTime = ((end - start) / (1000 * 60 * 60)).toFixed(1);
+
+        existingWorkDay.endTime = endTime;
+        existingWorkDay.totalTime = parseFloat(totalTime);
+
+        await fs.promises.writeFile(dbPath, JSON.stringify(db, null, 2), "UTF-8");
+        router.db.setState(db);
+
+        return res.json({ message: "Logout successful", workDay: existingWorkDay });
+      }
+
+      return res.status(404).json({ message: "Workday not found" });
+    }
+
+    return res.status(403).json({ message: "User not found" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 index.use((req, res, next) => {
   next();
 });
