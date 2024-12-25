@@ -9,7 +9,7 @@ const router = jsonServer.router(path.resolve(__dirname, "db.json"));
 index.use(jsonServer.defaults({}));
 index.use(jsonServer.bodyParser);
 
-index.post("/login", (req, res) => {
+index.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const dbPath = path.resolve(__dirname, "db.json");
@@ -33,16 +33,16 @@ index.post("/login", (req, res) => {
           userId: userFromBd.id,
           date: today,
           startTime: startTime,
-          endTime: "17:00",
+          endTime: "",
           totalTime: 0
         };
 
         workDays.push(newWorkDay);
-        fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), "UTF-8");
+        await fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), "UTF-8");
         router.db.setState(db);
       }
 
-      return res.json({authUser: userFromBd, workDays});
+      return res.json(userFromBd);
     }
 
     return res.status(403).json({ message: "Неправильный логин или пароль" });

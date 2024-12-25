@@ -61,6 +61,16 @@
       "password": "r@mail.ru",
       "salaryRate": 300,
       "id": 6
+    },
+    {
+      "surname": "er@",
+      "name": "er@mail.ru",
+      "patronymic": "er@mail.ru",
+      "phone": "+70008889900",
+      "email": "er@mail.ru",
+      "password": "er@mail.ru",
+      "salaryRate": 20,
+      "id": 7
     }
   ],
   "workDays": [
@@ -399,6 +409,14 @@
       "startTime": "15:38",
       "endTime": "17:00",
       "totalTime": 0
+    },
+    {
+      "id": 43,
+      "userId": 7,
+      "date": "2024-12-25",
+      "startTime": "15:49",
+      "endTime": "",
+      "totalTime": 0
     }
   ],
   "salary": [
@@ -457,6 +475,12 @@
       "startWork": "10:00",
       "endWork": "18:30",
       "id": 6
+    },
+    {
+      "userId": 7,
+      "startWork": "16:48",
+      "endWork": "19:48",
+      "id": 7
     }
   ]
 }
